@@ -19,14 +19,10 @@
 import 'dart:async' show Future;
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:sqflite_sqlcipher/sqflite.dart';
+import 'package:sqflite_common/sqflite.dart';
 
 class SqfEntityConnection {
-  SqfEntityConnection(this.databaseName,
-      {this.bundledDatabasePath,
-      this.dbVersion = 1,
-      this.password,
-      this.databasePath});
+  SqfEntityConnection(this.databaseName, {this.bundledDatabasePath, this.dbVersion = 1, this.password, this.databasePath});
   String databaseName;
   String? bundledDatabasePath;
   String? password;
@@ -50,9 +46,7 @@ abstract class SqfEntityConnectionBase {
     if (Platform.isWindows) {
       seperator = '\\';
     }
-    if (connection!.databasePath!
-            .substring(connection!.databasePath!.length - 1) ==
-        seperator) {
+    if (connection!.databasePath!.substring(connection!.databasePath!.length - 1) == seperator) {
       return connection!.databasePath!;
     }
     return connection!.databasePath! + seperator;
