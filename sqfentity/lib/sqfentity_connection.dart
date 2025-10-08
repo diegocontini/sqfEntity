@@ -21,6 +21,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 //import 'package:sqflite/sqflite.dart';
 
 import 'package:synchronized/synchronized.dart';
@@ -54,6 +55,7 @@ class SqfEntityConnectionMobile extends SqfEntityConnectionBase {
     final lock = Lock();
     Database? _db;
     await lock.synchronized(() async {
+      databaseFactory = databaseFactoryFfi;
       final path = join(getFinalDatabasePath(await getDatabasesPath()), connection!.databaseName);
       final file = File(path);
 
