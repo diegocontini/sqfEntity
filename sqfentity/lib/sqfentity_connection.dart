@@ -55,7 +55,6 @@ class SqfEntityConnectionMobile extends SqfEntityConnectionBase {
     final lock = Lock();
     Database? _db;
     await lock.synchronized(() async {
-      databaseFactory = databaseFactoryFfi;
       final path = join(getFinalDatabasePath(await getDatabasesPath()), connection!.databaseName);
       final file = File(path);
 
@@ -69,14 +68,14 @@ class SqfEntityConnectionMobile extends SqfEntityConnectionBase {
       }
 
       // uncomment line below if you want to use sqlchiper
-      _db = await openDatabase(
-        path,
-        version: connection!.dbVersion,
-        onCreate: createDb,
-      ); // SQLChipher
+      // _db = await openDatabase(
+      //   path,
+      //   version: connection!.dbVersion,
+      //   onCreate: createDb,
+      // ); // SQLChipher
 
       // uncomment line below if you want to use sqflite
-      // _db = await openDatabase(path, version: connection!.dbVersion, onCreate: createDb); // SQFLite
+      _db = await openDatabase(path, version: connection!.dbVersion, onCreate: createDb); // SQFLite
     });
     //}
     return _db!;
